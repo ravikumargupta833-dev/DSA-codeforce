@@ -1,6 +1,6 @@
 # 🚀 DSA Challenge
 
-A personal Data Structures & Algorithms practice repository — Java solutions to LeetCode problems, organized by problem number and synced automatically via [LeetHub v2](https://github.com/arunbhardwaj/LeetHub-2.0), plus a bonus set of daily practice files from an earlier 100-day challenge.
+A personal Data Structures & Algorithms practice repository — Java solutions to LeetCode problems, organized by problem number , plus a bonus set of daily practice files from an earlier 100-day challenge.
 
 ---
 
@@ -123,7 +123,7 @@ Solutions follow LeetCode's `class Solution` convention, so they can be pasted d
 ## 🛠️ Tools
 
 - **Language:** Java
-- **Sync:** [LeetHub v2](https://github.com/arunbhardwaj/LeetHub-2.0) (auto-commits solutions from LeetCode submissions)
+  
 
 ---
 
