@@ -8,33 +8,84 @@ public class Main {
 
         while (t-- > 0) {
             int n = sc.nextInt();
+            int k = sc.nextInt();
             String s = sc.next();
 
-            int mismatch = 0;
+            int score = 0;
+            int gaps = 0;
 
-            for (int i = 0; i < n / 2; i++) {
-                if (s.charAt(i) != s.charAt(n - 1 - i)) {
-                    mismatch++;
-                }
-            }
+            // Count current score and gaps of L's between W's
+            int i = 0;
 
-            StringBuilder ans = new StringBuilder();
-
-            for (int x = 0; x <= n; x++) {
-                boolean possible;
-
-                if (x < mismatch) {
-                    possible = false;
-                } else if (n % 2 == 1) {
-                    possible = true;
+            while (i < n) {
+                if (s.charAt(i) == 'W') {
+                    score++;
+                    if (i > 0 && s.charAt(i - 1) == 'W') {
+                        score++;
+                    }
+                    i++;
                 } else {
-                    possible = (x - mismatch) % 2 == 0;
-                }
+                    int j = i;
 
-                ans.append(possible ? '1' : '0');
+                    while (j < n && s.charAt(j) == 'L') {
+                        j++;
+                    }
+
+                    if (i > 0 && j < n) {
+                        gaps += j - i;
+                    }
+
+                    i = j;
+                }
             }
 
-            System.out.println(ans);
+            // No W initially
+            if (score == 0) {
+                score = Math.min(k, n) * 2 - 1;
+                System.out.println(Math.max(0, score));
+                continue;
+            }
+
+            // Fill internal gaps first
+            List<Integer> gapList = new ArrayList<>();
+
+            i = 0;
+            while (i < n) {
+                if (s.charAt(i) == 'L') {
+                    int j = i;
+                    while (j < n && s.charAt(j) == 'L') {
+                        j++;
+                    }
+
+                    if (i > 0 && j < n) {
+                        gapList.add(j - i);
+                    }
+
+                    i = j;
+                } else {
+                    i++;
+                }
+            }
+
+            Collections.sort(gapList);
+
+            for (int gap : gapList) {
+                if (k >= gap) {
+                    score += 2 * gap + 1;
+                    k -= gap;
+                } else {
+                    score += 2 * k;
+                    k = 0;
+                    break;
+                }
+            }
+
+            // Remaining changes can be used at the ends
+            if (k > 0) {
+                score += 2 * k;
+            }
+
+            System.out.println(Math.min(score, 2 * n - 1));
         }
     }
 }
