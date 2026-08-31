@@ -4,17 +4,33 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        int sumX = 0, sumY = 0;
+        int t = sc.nextInt();
 
-        for (int i = 0; i < n; i++) {
-            sumX += sc.nextInt();
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] a = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextInt();
+            }
+
+            Arrays.sort(a);
+
+            // First: distinct elements
+            for (int i = 0; i < n; i++) {
+                if (i == 0 || a[i] != a[i - 1]) {
+                    System.out.print(a[i] + " ");
+                }
+            }
+
+            // Second: duplicates
+            for (int i = 1; i < n; i++) {
+                if (a[i] == a[i - 1]) {
+                    System.out.print(a[i] + " ");
+                }
+            }
+
+            System.out.println();
         }
-
-        for (int i = 0; i < n; i++) {
-            sumY += sc.nextInt();
-        }
-
-        System.out.println(sumX >= sumY ? "Yes" : "No");
     }
 }
